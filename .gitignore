@@ -1,32 +1,144 @@
-# Prerequisites
-*.d
+#include <iostream>
+using namespace std;
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+class Fraction {
+public:
+	int _suret;
+	int _mexrec;
 
-# Precompiled Headers
-*.gch
-*.pch
+	Fraction(int suret, int mexrec)
+	{
+		_suret = suret;
+		_mexrec = mexrec;
+	}
+	Fraction operator+(const Fraction& other) {
+		int mexrec = _mexrec * other._mexrec;
+		int suret = ((mexrec / _mexrec) * _suret) + ((mexrec / other._mexrec) * other._suret);
+		return Fraction(suret, mexrec);
+	}
+	Fraction operator-(const Fraction& other) {
+		int mexrec = _mexrec * other._mexrec;
+		int suret = ((mexrec / _mexrec) * _suret) - ((mexrec / other._mexrec) * other._suret);
+		return Fraction(suret, mexrec);
+	}
+	Fraction operator*(const Fraction& other) {
+		int mexrec = _mexrec * other._mexrec;
+		int suret = _suret * other._suret;
+		return Fraction(suret, mexrec);
+	}
+	Fraction operator/(const Fraction& other) {
+		int mexrec = _mexrec * other._suret;
+		int suret = _suret * other._mexrec;
+		return Fraction(suret, mexrec);
+	}
+	void showFraction() {
+		cout << " " << _suret << endl;
+		cout << "" << "____" << endl;
+		cout << " " << _mexrec << endl;
+	}
+	void ixtisar() {
+		for (int i = 100; i > 1; i--) {
+			if (_suret % i == 0 && _mexrec % i == 0) {
+				_suret = _suret / i;
+				_mexrec = _mexrec / i;
+				break;
+			}
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
+		}
+		int _tam = _suret / _mexrec;
+		int _kesr = _suret-(_mexrec*(_suret / _mexrec));
+		cout << " " << _suret << endl;
+		cout << "" << "____" << endl;
+		cout << " " << _mexrec << endl;
+		cout << endl;
+		cout << "*********" << endl;
+		cout << endl;
+		cout << "Tam hissesi:" << _tam << endl;
+		cout << endl;
+		cout << "*********" << endl;
+		cout << endl;
+		cout << "              " <<   _kesr << endl;
+		cout << "kesr hissesi:" << "____" << endl;
+		cout << "              " << _mexrec << endl;
+		cout << endl;
+		cout <<  endl;
+		cout << "                " <<_kesr << endl;
+		cout << "kesr hissesi:"<<_tam<< " ____" << endl;
+		cout << "                "<< _mexrec << endl;
+		
+	}
+};
 
-# Fortran module files
-*.mod
-*.smod
 
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
 
-# Executables
-*.exe
-*.out
-*.app
+void main()
+{
+	int x = 0;
+	cout << "1.+" << endl;
+	cout << "2.-" << endl;
+	cout << "3.*" << endl;
+	cout << "4./" << endl;
+	cout << "sechim et:" ;
+	cin >> x;
+
+	int r1s = 0;
+	cout << "reqem 1 suret daxil et:";
+	cin >> r1s;
+
+	int r1m = 0;
+	cout << "reqem 1 mexrec daxil et:";
+	cin >> r1m;
+
+	int r2s = 0;
+	cout << "reqem 2 suret daxil et:";
+	cin >> r2s;
+
+	int r2m = 0;
+	cout << "reqem 2 mexrec daxil et:";
+	cin >> r2m;
+
+	Fraction f1(r1s, r1m);
+	Fraction f2(r2s, r2m);
+
+	if (x == 1) {
+		Fraction f3 = f1 + f2;
+		cout << "_________" << "  +  " << "_________" << endl;
+		f3.showFraction();
+		cout << "ixtisar" << endl;
+		f3.ixtisar();
+		cout << endl;
+		cout << endl;
+	}
+	else if (x == 2) {
+		Fraction f4 = f1 - f2;
+		cout << "_________" << "  -  " << "_________" << endl;
+		f4.showFraction();
+		cout << "ixtisar" << endl;
+		f4.ixtisar();
+		cout << endl;
+		cout << endl;
+	}
+	else if (x == 3) {
+
+		Fraction f5 = f1 * f2;
+		cout << "_________" << "  *  " << "_________" << endl;
+		f5.showFraction();
+		cout << "ixtisar" << endl;
+		f5.ixtisar();
+		cout << endl;
+		cout << endl;
+	}
+
+	else if (x == 4) {
+		Fraction f6 = f1 / f2;
+		cout << "_________" << "  /  " << "_________" << endl;
+		f6.showFraction();
+		cout << "ixtisar" << endl;
+		f6.ixtisar();
+		cout << endl;
+		cout << endl;
+	}
+	else {
+		cout<<"sen 1-4 arasinda reqem qeyd etmelisen!!!!!"<<endl;
+	}
+}
